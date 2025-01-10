@@ -21,13 +21,6 @@
             border-radius: 10px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-        .example-label {
-            text-align: center;
-            font-weight: bold;
-            font-size: 14px;
-            color: #657786;
-            margin-bottom: 10px;
-        }
         .tweet-header {
             padding: 15px;
             display: flex;
@@ -116,13 +109,9 @@
             <h1 class="text-3xl font-bold text-center mb-6">Post-Truth Generator</h1>
             <p class="text-center mb-6">Welcome to the Post-Truth Generator! Enter any text in the field below and get undeniable proof that Elon Musk said exactly that. Everyone will believe you, because there's no censorship on Twitter, screenshots can't be faked, and Elon Musk never lies.</p>
             <textarea id="tweet-input" class="w-full p-3 border rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Write your post-truth..."></textarea>
-            <div class="flex gap-4 mt-4">
-                <button id="generate-posttruth" class="generate-button">Generate Post-Truth</button>
-                <button id="generate-truth" class="generate-button">Generate Truth</button>
-            </div>
+            <button id="generate-button" class="generate-button mt-4">Generate Tweet</button>
         </div>
-        <div id="example-container" class="tweet-container">
-            <div class="example-label">EXAMPLE</div>
+        <div id="example-container" class="tweet-container hidden">
             <div class="tweet-header">
                 <img src="https://pbs.twimg.com/profile_images/1874558173962481664/8HSTqIlD_400x400.jpg" alt="Elon Musk">
                 <div class="user-info">
@@ -172,7 +161,7 @@
             return count;
         }
 
-        function generateTweet(isTruth) {
+        document.getElementById('generate-button').addEventListener('click', function() {
             const randomCounts = {
                 comments: Math.floor(Math.random() * 1000),
                 retweets: Math.floor(Math.random() * 5000),
@@ -192,16 +181,8 @@
                 return;
             }
 
-            document.getElementById('tweet-body').innerText = isTruth ? `${text}\n\nit's true!` : text;
-            document.getElementById('example-container').style.display = 'none';
-        }
-
-        document.getElementById('generate-posttruth').addEventListener('click', function() {
-            generateTweet(false);
-        });
-
-        document.getElementById('generate-truth').addEventListener('click', function() {
-            generateTweet(true);
+            document.getElementById('tweet-body').innerText = text;
+            document.getElementById('example-container').classList.remove('hidden');
         });
     </script>
 </body>
