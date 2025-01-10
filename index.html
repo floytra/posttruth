@@ -226,5 +226,16 @@
     <span class="font-bold">Disclaimer:</span><br>
     There are no share buttons here and never will be, because nobody needs links or sources. Post-truth spreads best through screenshots. Just take a screenshot of the tweet or the whole page and share it.
 </p>
+    <button id="share-button" class="block mx-auto mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Share</button>
+    <p id="disclaimer" class="text-gray-500 text-sm mt-6 mx-auto text-left max-w-xl hidden">
+        <span class="font-bold">Disclaimer:</span><br>
+        There are no share buttons here and never will be, because nobody needs links or sources. Post-truth spreads best through screenshots. Just take a screenshot of the tweet or the whole page and share it.
+    </p>
+    <script>
+        document.getElementById('share-button').addEventListener('click', function() {
+            document.getElementById('share-button').style.display = 'none';
+            document.getElementById('disclaimer').classList.remove('hidden');
+        });
+    </script>
 </body>
 </html>
