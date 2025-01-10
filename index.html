@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tweet Generator </title>
+    <title>Post-Truth Generator</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" defer></script>
     <style>
@@ -20,6 +20,13 @@
             border: 1px solid #e1e8ed;
             border-radius: 10px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .example-label {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: #657786;
+            margin-bottom: 10px;
         }
         .tweet-header {
             padding: 15px;
@@ -88,16 +95,34 @@
             width: 16px;
             height: 16px;
         }
+        .generate-button {
+            width: 100%;
+            padding: 15px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 50px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .generate-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
     <div id="root">
         <div class="max-w-xl mx-auto mb-6">
-            <h1 class="text-3xl font-bold text-center mb-6">Tweet Generator </h1>
-            <textarea id="tweet-input" class="w-full p-3 border rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter tweet text..."></textarea>
-            <button id="generate-button" class="w-full bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 mt-4 font-bold">Generate Tweet</button>
+            <h1 class="text-3xl font-bold text-center mb-6">Post-Truth Generator</h1>
+            <p class="text-center mb-6">Welcome to the Post-Truth Generator! Enter any text in the field below and get undeniable proof that Elon Musk said exactly that. Everyone will believe you, because there's no censorship on Twitter, screenshots can't be faked, and Elon Musk never lies.</p>
+            <textarea id="tweet-input" class="w-full p-3 border rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Write your post-truth..."></textarea>
+            <div class="flex gap-4 mt-4">
+                <button id="generate-posttruth" class="generate-button">Generate Post-Truth</button>
+                <button id="generate-truth" class="generate-button">Generate Truth</button>
+            </div>
         </div>
-        <div class="tweet-container hidden" id="tweet-container">
+        <div id="example-container" class="tweet-container">
+            <div class="example-label">EXAMPLE</div>
             <div class="tweet-header">
                 <img src="https://pbs.twimg.com/profile_images/1874558173962481664/8HSTqIlD_400x400.jpg" alt="Elon Musk">
                 <div class="user-info">
@@ -110,27 +135,27 @@
                     <span class="username">@elonmusk</span>
                 </div>
             </div>
-            <div class="tweet-body" id="tweet-body"></div>
+            <div class="tweet-body">agi sucks!!!!!</div>
             <div class="tweet-footer">
                 <div class="meta">
-                    <span id="tweet-date"></span> · <span id="views" class="views"></span>
+                    <span id="tweet-date">Jan 8, 2025</span> · <span id="views">15.9M Views</span>
                 </div>
                 <div class="actions">
                     <div>
                         <i class="far fa-comment"></i>
-                        <span id="comments-count"></span>
+                        <span>4.2K</span>
                     </div>
                     <div>
                         <i class="fas fa-retweet"></i>
-                        <span id="retweets-count"></span>
+                        <span>40K</span>
                     </div>
                     <div>
                         <i class="far fa-heart"></i>
-                        <span id="likes-count"></span>
+                        <span>158K</span>
                     </div>
                     <div>
                         <i class="far fa-bookmark"></i>
-                        <span id="bookmarks-count"></span>
+                        <span>5.6K</span>
                     </div>
                     <div>
                         <i class="fas fa-share"></i>
@@ -141,13 +166,13 @@
     </div>
 
     <script>
-        document.getElementById('generate-button').addEventListener('click', function() {
-            function formatCount(count) {
-                if (count >= 1000000) return (count / 1000000).toFixed(1) + 'M';
-                if (count >= 1000) return (count / 1000).toFixed(1) + 'K';
-                return count;
-            }
+        function formatCount(count) {
+            if (count >= 1000000) return (count / 1000000).toFixed(1) + 'M';
+            if (count >= 1000) return (count / 1000).toFixed(1) + 'K';
+            return count;
+        }
 
+        function generateTweet(isTruth) {
             const randomCounts = {
                 comments: Math.floor(Math.random() * 1000),
                 retweets: Math.floor(Math.random() * 5000),
@@ -163,18 +188,20 @@
 
             const text = document.getElementById('tweet-input').value;
             if (!text.trim()) {
-                alert('Please enter text for the tweet!');
+                alert('Write your post-truth!');
                 return;
             }
 
-            document.getElementById('tweet-body').innerText = text;
-            document.getElementById('tweet-date').innerText = new Date().toLocaleString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            document.getElementById('tweet-container').classList.remove('hidden');
+            document.getElementById('tweet-body').innerText = isTruth ? `${text}\n\nit's true!` : text;
+            document.getElementById('example-container').style.display = 'none';
+        }
+
+        document.getElementById('generate-posttruth').addEventListener('click', function() {
+            generateTweet(false);
+        });
+
+        document.getElementById('generate-truth').addEventListener('click', function() {
+            generateTweet(true);
         });
     </script>
 </body>
