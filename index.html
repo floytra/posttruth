@@ -39,7 +39,7 @@
         .tweet-header .name-row {
             display: flex;
             align-items: center;
-            gap: 8px; /* Увеличен отступ для читабельности */
+            gap: 8px;
         }
         .tweet-header .name {
             font-weight: 700;
@@ -50,10 +50,6 @@
             color: #657786;
             font-size: 14px;
         }
-        .tweet-header .views {
-            font-size: 14px;
-            color: #657786;
-        }
         .tweet-body {
             padding: 15px;
             font-size: 16px;
@@ -62,14 +58,23 @@
         }
         .tweet-footer {
             padding: 10px 15px;
+            color: #657786;
+            font-size: 14px;
+        }
+        .tweet-footer .meta {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+        .tweet-footer .actions {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             justify-content: space-between;
             align-items: center;
-            color: #657786;
-            font-size: 14px;
         }
-        .tweet-footer div {
+        .tweet-footer .actions div {
             display: flex;
             align-items: center;
             gap: 5px;
@@ -107,24 +112,29 @@
             </div>
             <div class="tweet-body" id="tweet-body"></div>
             <div class="tweet-footer">
-                <div>
-                    <i class="far fa-comment"></i>
-                    <span id="comments-count"></span>
-                </div>
-                <div>
-                    <i class="fas fa-retweet"></i>
-                    <span id="retweets-count"></span>
-                </div>
-                <div>
-                    <i class="far fa-heart"></i>
-                    <span id="likes-count"></span>
-                </div>
-                <div>
-                    <i class="far fa-bookmark"></i>
-                    <span id="bookmarks-count"></span>
-                </div>
-                <div style="font-size: 14px; color: #657786;">
+                <div class="meta">
                     <span id="tweet-date"></span> · <span id="views" class="views"></span>
+                </div>
+                <div class="actions">
+                    <div>
+                        <i class="far fa-comment"></i>
+                        <span id="comments-count"></span>
+                    </div>
+                    <div>
+                        <i class="fas fa-retweet"></i>
+                        <span id="retweets-count"></span>
+                    </div>
+                    <div>
+                        <i class="far fa-heart"></i>
+                        <span id="likes-count"></span>
+                    </div>
+                    <div>
+                        <i class="far fa-bookmark"></i>
+                        <span id="bookmarks-count"></span>
+                    </div>
+                    <div>
+                        <i class="fas fa-share"></i>
+                    </div>
                 </div>
             </div>
         </div>
