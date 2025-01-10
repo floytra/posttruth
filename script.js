@@ -18,6 +18,7 @@ function generateTweet() {
         bookmarks: Math.floor(Math.random() * 5000),
         views: (Math.random() * 10 + 5).toFixed(1) + 'M'
     };
+
     document.getElementById('comments-count').innerText = formatCount(randomCounts.comments);
     document.getElementById('retweets-count').innerText = formatCount(randomCounts.retweets);
     document.getElementById('likes-count').innerText = formatCount(randomCounts.likes);
@@ -32,3 +33,5 @@ function generateTweet() {
 
     document.getElementById('tweet-body').innerText = text;
 }
+
+document.getElementById('generate-button').addEventListener('click', generateTweet);
