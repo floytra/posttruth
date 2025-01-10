@@ -33,5 +33,15 @@ function generateTweet() {
 
     document.getElementById('tweet-body').innerText = text;
 }
+document.getElementById('share-button').addEventListener('click', function () {
+    const shareButton = document.getElementById('share-button');
+    const disclaimer = document.getElementById('disclaimer');
+
+    // Скрываем кнопку Share
+    shareButton.style.display = 'none';
+
+    // Показываем дисклеймер
+    disclaimer.classList.remove('hidden');
+});
 
 document.getElementById('generate-button').addEventListener('click', generateTweet);
