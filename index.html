@@ -62,9 +62,10 @@
         }
         .tweet-footer {
             padding: 10px 15px;
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
             justify-content: space-between;
-            align-items: center; /* Выравнивание кнопок */
+            align-items: center;
             color: #657786;
             font-size: 14px;
         }
@@ -74,7 +75,7 @@
             gap: 5px;
         }
         .tweet-footer i {
-            font-size: 18px;
+            font-size: 16px;
             color: #657786;
         }
         .verified-icon {
@@ -106,9 +107,6 @@
             </div>
             <div class="tweet-body" id="tweet-body"></div>
             <div class="tweet-footer">
-                <div style="flex-grow: 1; font-size: 14px; color: #657786; text-align: left;">
-                    <span id="tweet-date"></span> · <span id="views" class="views"></span>
-                </div>
                 <div>
                     <i class="far fa-comment"></i>
                     <span id="comments-count"></span>
@@ -124,6 +122,9 @@
                 <div>
                     <i class="far fa-bookmark"></i>
                     <span id="bookmarks-count"></span>
+                </div>
+                <div style="font-size: 14px; color: #657786;">
+                    <span id="tweet-date"></span> · <span id="views" class="views"></span>
                 </div>
             </div>
         </div>
