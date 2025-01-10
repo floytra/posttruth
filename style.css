@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f7fb;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(240, 244, 248, 1));
+    padding: 20px;
+}
+
+.section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tweet-container {
+    max-width: 600px;
+    margin: 20px auto;
+    background: #ffffff;
+    border: 1px solid #e1e8ed;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.tweet-container.highlight {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+.example-label {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: #657786;
+    margin-bottom: 10px;
+}
+
+.tweet-header {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tweet-header img {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+}
+
+.tweet-header .user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.tweet-header .name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tweet-header .name {
+    font-weight: 700;
+    font-size: 15px;
+    color: #0f1419;
+}
+
+.tweet-header .username {
+    color: #657786;
+    font-size: 14px;
+}
+
+.tweet-body {
+    padding: 15px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #0f1419;
+}
+
+.tweet-footer {
+    padding: 10px 15px;
+    color: #657786;
+    font-size: 14px;
+}
+
+.tweet-footer .meta {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.tweet-footer .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
+    border-top: 1px solid #e1e8ed;
+    margin-top: 8px;
+}
+
+.tweet-footer .actions div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #657786;
+}
+
+.tweet-footer i {
+    font-size: 16px;
+    color: #657786;
+}
+
+.verified-icon {
+    color: #1DA1F2;
+    width: 16px;
+    height: 16px;
+}
+
+.generate-button {
+    width: 100%;
+    padding: 15px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
+    border-radius: 50px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.generate-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(255, 117, 140, 0.5);
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-2px);
+    }
+    50% {
+        transform: translateX(2px);
+    }
+    75% {
+        transform: translateX(-2px);
+    }
+}
