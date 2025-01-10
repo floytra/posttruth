@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tweet Generator</title>
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -58,82 +55,63 @@
     </style>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="text/babel">
-        function TweetGenerator() {
-            const [text, setText] = React.useState('');
-            const [generatedTweet, setGeneratedTweet] = React.useState('Neural networks are trash!!'); // ⚠️ Remove this hardcoded text before release
-            const [isGenerating, setIsGenerating] = React.useState(false);
+    <div id="root">
+        <div class="max-w-xl mx-auto">
+            <h1 class="text-3xl font-bold text-center mb-6">Tweet Generator</h1>
+            <p class="text-center text-gray-700 mb-6">Welcome to the post-truth generator. Enter any text below and get a rock-solid proof that Elon Musk said exactly that. Everyone will believe you because screenshots can't be faked, and Elon Musk never lies.</p>
+            <div class="space-y-4">
+                <textarea
+                    id="tweet-input"
+                    placeholder="Enter tweet text..."
+                    class="w-full p-3 border rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                ></textarea>
+                <button
+                    id="generate-button"
+                    class="w-full bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 disabled:bg-gray-400 font-bold"
+                >
+                    Generate Tweet
+                </button>
+            </div>
+            <div id="generated-tweet" class="tweet-container mt-6 hidden">
+                <div class="tweet-header">
+                    <img src="https://pbs.twimg.com/profile_images/1683325380441128960/yRsRRjGO_400x400.jpg" alt="Elon Musk" />
+                    <div>
+                        <div class="name">Elon Musk <span class="verified-icon">✔</span></div>
+                        <div class="username">@elonmusk · <span id="tweet-date"></span></div>
+                    </div>
+                </div>
+                <div class="tweet-body" id="tweet-body"></div>
+                <div class="tweet-footer">
+                    <div class="flex items-center space-x-2">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                        <span>12</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.046 2.242c-3.905-.33-7.622 1.736-8.78 5.35A9.254 9.254 0 002.75 12c0 3.045 1.563 5.75 4.058 7.242.36.215.502.68.287 1.04-.218.36-.68.503-1.04.287A10.735 10.735 0 010 12c0-6.048 4.924-10.972 10.972-10.972.683 0 1.35.055 2 .158.385.064.677.385.677.785a.79.79 0 01-.786.79c-.5 0-.993-.048-1.486-.143z"/></svg>
+                        <span>1.4K</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 15h4l-1 5 8-12h-4l1-5z"/></svg>
+                        <span>21</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('generate-button').addEventListener('click', function() {
+            const text = document.getElementById('tweet-input').value;
+            if (!text.trim()) return;
 
-            const currentDate = new Date().toLocaleString('en-US', {
+            document.getElementById('tweet-body').innerText = text;
+            document.getElementById('tweet-date').innerText = new Date().toLocaleString('en-US', {
                 month: 'short',
                 day: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit'
             });
-
-            const generateTweetImage = () => {
-                setIsGenerating(true);
-                setTimeout(() => {
-                    setGeneratedTweet(text);
-                    setIsGenerating(false);
-                }, 1000);
-            };
-
-            return (
-                <div className="max-w-xl mx-auto">
-                    <h1 className="text-3xl font-bold text-center mb-6">Tweet Generator</h1>
-                    <p className=\"text-center text-gray-700 mb-6\">Welcome to the post-truth generator. Enter any text below and get a rock-solid proof that Elon Musk said exactly that. Everyone will believe you because screenshots can't be faked, and Elon Musk never lies.</p>
-                    <div className=\"space-y-4\">
-                        <textarea
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                            placeholder="Enter tweet text..."
-                            className="w-full p-3 border rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-
-                        <button
-                            className="w-full bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 disabled:bg-gray-400 font-bold"
-                            onClick={generateTweetImage}
-                            disabled={isGenerating || !text.trim()}
-                        >
-                            {isGenerating ? 'Generating Tweet...' : 'Generate Tweet'}
-                        </button>
-                    </div>
-
-                    {generatedTweet && (
-                        <div className="tweet-container mt-6">
-                            <div className="tweet-header">
-                                <img src=\"https://raw.githubusercontent.com/floytra/posttruth/main/img/elon_userpic.jpg\" alt="Elon Musk" />
-                                <div>
-                                    <div className="name">Elon Musk <span className="verified-icon">✔</span></div>
-                                    <div className="username">@elonmusk · {currentDate}</div>
-                                </div>
-                            </div>
-                            <div className="tweet-body">
-                                {generatedTweet}
-                            </div>
-                            <div className="tweet-footer">
-                                <div className="flex items-center space-x-2">
-                                    <svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z\" /><\/svg>
-                                    <span>12</span>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.046 2.242c-3.905-.33-7.622 1.736-8.78 5.35A9.254 9.254 0 002.75 12c0 3.045 1.563 5.75 4.058 7.242.36.215.502.68.287 1.04-.218.36-.68.503-1.04.287A10.735 10.735 0 010 12c0-6.048 4.924-10.972 10.972-10.972.683 0 1.35.055 2 .158.385.064.677.385.677.785a.79.79 0 01-.786.79c-.5 0-.993-.048-1.486-.143z"/></svg>
-                                    <span>1.4K</span>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 15h4l-1 5 8-12h-4l1-5z"/></svg>
-                                    <span>21</span>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            );
-        }
-
-        ReactDOM.render(<TweetGenerator />, document.getElementById('root'));
+            document.getElementById('generated-tweet').classList.remove('hidden');
+        });
     </script>
 </body>
 </html>
