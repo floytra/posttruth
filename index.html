@@ -5,237 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What Elon Musk *Really* Said</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" defer></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f9f9;
-            padding: 20px;
-        }
-        .tweet-container {
-            max-width: 600px;
-            margin: 0 auto 20px;
-            background: #ffffff;
-            border: 1px solid #e1e8ed;
-            border-radius: 10px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-        }
-        .tweet-container.highlight {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transform: scale(1.02);
-        }
-        .example-label {
-            text-align: center;
-            font-weight: bold;
-            font-size: 16px;
-            color: #657786;
-            margin-bottom: 10px;
-        }
-        .tweet-header {
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .tweet-header img {
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-        }
-        .tweet-header .user-info {
-            display: flex;
-            flex-direction: column;
-        }
-        .tweet-header .name-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .tweet-header .name {
-            font-weight: 700;
-            font-size: 15px;
-            color: #0f1419;
-        }
-        .tweet-header .username {
-            color: #657786;
-            font-size: 14px;
-        }
-        .tweet-body {
-            padding: 15px;
-            font-size: 16px;
-            line-height: 1.6;
-            color: #0f1419;
-        }
-        .tweet-footer {
-            padding: 10px 15px;
-            color: #657786;
-            font-size: 14px;
-        }
-        .tweet-footer .meta {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 5px;
-            margin-bottom: 8px;
-        }
-        .tweet-footer .actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 5px;
-            border-top: 1px solid #e1e8ed;
-            margin-top: 8px;
-        }
-        .tweet-footer .actions div {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: #657786;
-        }
-        .tweet-footer i {
-            font-size: 16px;
-            color: #657786;
-        }
-        .verified-icon {
-            color: #1DA1F2;
-            width: 16px;
-            height: 16px;
-        }
-        .generate-button {
-            width: 100%;
-            padding: 15px;
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
-            border-radius: 50px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            animation: shake 2s infinite;
-        }
-        .generate-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        @keyframes shake {
-            0%, 100% {
-                transform: translateX(0);
-            }
-            25% {
-                transform: translateX(-2px);
-            }
-            50% {
-                transform: translateX(2px);
-            }
-            75% {
-                transform: translateX(-2px);
-            }
-        }
-    </style>
 </head>
 <body>
     <div id="root">
-        <div class="max-w-xl mx-auto mb-6 text-left">
-            <h1 class="text-3xl font-bold text-left mb-6">What Elon Musk <em>Really</em> Said</h1>
+        <div class="section">
+            <h1 class="text-3xl font-bold text-center mb-6">What Elon Musk <em>Really</em> Said</h1>
             <p class="text-left mb-6">Welcome to the <strong>Post-Truth Generator</strong>! Enter any text in the field below and get undeniable proof that <strong>Elon Musk said exactly that</strong>. Everyone will believe you, because there's <strong>no censorship on Twitter</strong>, screenshots can't be faked, and Elon Musk never lies.</p>
+        </div>
+        <div class="section">
             <textarea id="tweet-input" class="w-full p-3 border rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Write your post-truth..."></textarea>
             <button id="generate-button" class="generate-button mt-4">Generate Tweet</button>
         </div>
-        <div class="example-label">EXAMPLE</div>
-        <div id="example-container" class="tweet-container">
-            <div class="tweet-header">
-                <img src="https://pbs.twimg.com/profile_images/1874558173962481664/8HSTqIlD_400x400.jpg" alt="Elon Musk">
-                <div class="user-info">
-                    <div class="name-row">
-                        <span class="name">Elon Musk</span>
-                        <svg class="verified-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z" fill="#1DA1F2"/>
-                        </svg>
+        <div class="section">
+            <div id="example-container" class="tweet-container">
+                <div class="tweet-header">
+                    <img src="https://pbs.twimg.com/profile_images/1874558173962481664/8HSTqIlD_400x400.jpg" alt="Elon Musk">
+                    <div class="user-info">
+                        <div class="name-row">
+                            <span class="name">Elon Musk</span>
+                            <svg class="verified-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z" fill="#1DA1F2"/>
+                            </svg>
+                        </div>
+                        <span class="username">@elonmusk</span>
                     </div>
-                    <span class="username">@elonmusk</span>
                 </div>
-            </div>
-            <div class="tweet-body" id="tweet-body">agi sucks!!!!!</div>
-            <div class="tweet-footer">
-                <div class="meta">
-                    <span id="tweet-date">Jan 8, 2025</span> · <span id="views">15.9M Views</span>
-                </div>
-                <div class="actions">
-                    <div>
-                        <i class="far fa-comment"></i>
-                        <span id="comments-count">4.2K</span>
+                <div class="tweet-body" id="tweet-body">agi sucks!!!!!</div>
+                <div class="tweet-footer">
+                    <div class="meta">
+                        <span id="tweet-date">Jan 8, 2025</span> · <span id="views">15.9M Views</span>
                     </div>
-                    <div>
-                        <i class="fas fa-retweet"></i>
-                        <span id="retweets-count">40K</span>
-                    </div>
-                    <div>
-                        <i class="far fa-heart"></i>
-                        <span id="likes-count">158K</span>
-                    </div>
-                    <div>
-                        <i class="far fa-bookmark"></i>
-                        <span id="bookmarks-count">5.6K</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-share"></i>
+                    <div class="actions">
+                        <div>
+                            <i class="far fa-comment"></i>
+                            <span id="comments-count">4.2K</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-retweet"></i>
+                            <span id="retweets-count">40K</span>
+                        </div>
+                        <div>
+                            <i class="far fa-heart"></i>
+                            <span id="likes-count">158K</span>
+                        </div>
+                        <div>
+                            <i class="far fa-bookmark"></i>
+                            <span id="bookmarks-count">5.6K</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-share"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        function formatCount(count) {
-            if (count >= 1000000) return (count / 1000000).toFixed(1) + 'M';
-            if (count >= 1000) return (count / 1000).toFixed(1) + 'K';
-            return count;
-        }
-
-        document.getElementById('generate-button').addEventListener('click', function() {
-            const tweetContainer = document.getElementById('example-container');
-            tweetContainer.classList.add('highlight');
-            setTimeout(() => {
-                tweetContainer.classList.remove('highlight');
-            }, 600);
-
-            const randomCounts = {
-                comments: Math.floor(Math.random() * 1000),
-                retweets: Math.floor(Math.random() * 5000),
-                likes: Math.floor(Math.random() * 10000),
-                bookmarks: Math.floor(Math.random() * 5000),
-                views: (Math.random() * 10 + 5).toFixed(1) + 'M'
-            };
-            document.getElementById('comments-count').innerText = formatCount(randomCounts.comments);
-            document.getElementById('retweets-count').innerText = formatCount(randomCounts.retweets);
-            document.getElementById('likes-count').innerText = formatCount(randomCounts.likes);
-            document.getElementById('bookmarks-count').innerText = formatCount(randomCounts.bookmarks);
-            document.getElementById('views').innerText = randomCounts.views;
-
-            const text = document.getElementById('tweet-input').value;
-            if (!text.trim()) {
-                alert('Write your post-truth!');
-                return;
-            }
-
-            document.getElementById('tweet-body').innerText = text;
-        });
-    </script>
-    <p class="text-gray-500 text-sm mt-6 mx-auto text-left max-w-xl">
-    <span class="font-bold">Disclaimer:</span><br>
-    There are no share buttons here and never will be, because nobody needs links or sources. Post-truth spreads best through screenshots. Just take a screenshot of the tweet or the whole page and share it.
-</p>
-    <button id="share-button" class="block mx-auto mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Share</button>
-    <p id="disclaimer" class="text-gray-500 text-sm mt-6 mx-auto text-left max-w-xl hidden">
-        <span class="font-bold">Disclaimer:</span><br>
-        There are no share buttons here and never will be, because nobody needs links or sources. Post-truth spreads best through screenshots. Just take a screenshot of the tweet or the whole page and share it.
-    </p>
-    <script>
-        document.getElementById('share-button').addEventListener('click', function() {
-            document.getElementById('share-button').style.display = 'none';
-            document.getElementById('disclaimer').classList.remove('hidden');
-        });
-    </script>
 </body>
 </html>
