@@ -33,6 +33,9 @@
         }
         .tweet-header .name {
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         .tweet-header .username {
             color: #657786;
@@ -54,39 +57,64 @@
             gap: 5px;
         }
         .tweet-footer svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+        .verified-icon {
+            color: #1DA1F2;
+            width: 16px;
+            height: 16px;
         }
     </style>
 </head>
 <body>
     <div id="root">
-        <div class="tweet-container">
+        <div class="max-w-xl mx-auto mb-6">
+            <h1 class="text-3xl font-bold text-center mb-6">Tweet Generator</h1>
+            <textarea id="tweet-input" class="w-full p-3 border rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter tweet text..."></textarea>
+            <button id="generate-button" class="w-full bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 mt-4 font-bold">Generate Tweet</button>
+        </div>
+        <div class="tweet-container hidden" id="tweet-container">
             <div class="tweet-header">
                 <img src="https://pbs.twimg.com/profile_images/1874558173962481664/8HSTqIlD_400x400.jpg" alt="Elon Musk">
                 <div>
-                    <div class="name">Elon Musk <span style="color: #1DA1F2;">✔</span></div>
-                    <div class="username">@elonmusk · <span id="tweet-date">16h</span></div>
+                    <div class="name">Elon Musk <svg class="verified-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#1DA1F2"/><path d="M9.75 11.25l1.5 1.5 3-3" fill="none" stroke="#fff" stroke-width="2"/></svg></div>
+                    <div class="username">@elonmusk · <span id="tweet-date"></span></div>
                 </div>
             </div>
-            <div class="tweet-body" id="tweet-body">
-                This is how your tweet will look after generation. Customize it as needed!
-            </div>
+            <div class="tweet-body" id="tweet-body"></div>
             <div class="tweet-footer">
                 <div>
-                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M14.046 2.242c-3.905-.33-7.622 1.736-8.78 5.35A9.254 9.254 0 002.75 12c0 3.045 1.563 5.75 4.058 7.242.36.215.502.68.287 1.04-.218.36-.68.503-1.04.287A10.735 10.735 0 010 12c0-6.048 4.924-10.972 10.972-10.972.683 0 1.35.055 2 .158.385.064.677.385.677.785a.79.79 0 01-.786.79c-.5 0-.993-.048-1.486-.143z"/></svg>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.046 2.242c-3.905-.33-7.622 1.736-8.78 5.35A9.254 9.254 0 002.75 12c0 3.045 1.563 5.75 4.058 7.242.36.215.502.68.287 1.04-.218.36-.68.503-1.04.287A10.735 10.735 0 010 12c0-6.048 4.924-10.972 10.972-10.972.683 0 1.35.055 2 .158.385.064.677.385.677.785a.79.79 0 01-.786.79c-.5 0-.993-.048-1.486-.143z"/></svg>
                     <span>54</span>
                 </div>
                 <div>
-                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5 15h4l-1 5 8-12h-4l1-5z"/></svg>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 15h4l-1 5 8-12h-4l1-5z"/></svg>
                     <span>66</span>
                 </div>
                 <div>
-                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 4.5c-4.14 0-7.5 3.36-7.5 7.5S7.86 19.5 12 19.5s7.5-3.36 7.5-7.5S16.14 4.5 12 4.5zm0 13c-3.04 0-5.5-2.46-5.5-5.5S8.96 6.5 12 6.5s5.5 2.46 5.5 5.5-2.46 5.5-5.5 5.5z"/></svg>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4.5c-4.14 0-7.5 3.36-7.5 7.5S7.86 19.5 12 19.5s7.5-3.36 7.5-7.5S16.14 4.5 12 4.5zm0 13c-3.04 0-5.5-2.46-5.5-5.5S8.96 6.5 12 6.5s5.5 2.46 5.5 5.5-2.46 5.5-5.5 5.5z"/></svg>
                     <span>101.1K</span>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('generate-button').addEventListener('click', function() {
+            const text = document.getElementById('tweet-input').value;
+            if (!text.trim()) return;
+
+            document.getElementById('tweet-body').innerText = text;
+            document.getElementById('tweet-date').innerText = new Date().toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('tweet-container').classList.remove('hidden');
+        });
+    </script>
 </body>
 </html>
