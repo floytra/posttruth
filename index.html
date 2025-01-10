@@ -50,12 +50,9 @@
             color: #657786;
             font-size: 14px;
         }
-        .tweet-header .org-icon {
-            width: 16px;
-            height: 16px;
-            background-color: #1DA1F2;
-            border-radius: 50%;
-            display: inline-block;
+        .tweet-header .views {
+            font-size: 14px;
+            color: #657786;
         }
         .tweet-body {
             padding: 15px;
@@ -100,31 +97,28 @@
                     <div class="name-row">
                         <span class="name">Elon Musk</span>
                         <svg class="verified-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="10" fill="#1DA1F2"/>
-                            <path d="M9.75 11.25l1.5 1.5 3-3" fill="none" stroke="#fff" stroke-width="2"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z" fill="#1DA1F2"/>
                         </svg>
-                        <div class="org-icon"></div>
                     </div>
-                    <span class="username">@elonmusk · <span id="tweet-date"></span></span>
+                    <span class="username">@elonmusk · <span id="tweet-date"></span> · <span id="views" class="views"></span></span>
                 </div>
             </div>
             <div class="tweet-body" id="tweet-body"></div>
             <div class="tweet-footer">
                 <div>
                     <i class="far fa-comment"></i>
-                    <span>123</span>
+                    <span id="comments-count"></span>
                 </div>
                 <div>
                     <i class="fas fa-retweet"></i>
-                    <span>456</span>
+                    <span id="retweets-count"></span>
                 </div>
                 <div>
                     <i class="far fa-heart"></i>
-                    <span>789</span>
+                    <span id="likes-count"></span>
                 </div>
                 <div>
-                    <i class="far fa-eye"></i>
-                    <span>1.2M</span>
+                    <i class="far fa-bookmark"></i>
                 </div>
             </div>
         </div>
@@ -132,6 +126,16 @@
 
     <script>
         document.getElementById('generate-button').addEventListener('click', function() {
+            const randomCounts = {
+                comments: Math.floor(Math.random() * 1000),
+                retweets: Math.floor(Math.random() * 5000),
+                likes: Math.floor(Math.random() * 10000),
+                views: (Math.random() * 10 + 5).toFixed(1) + 'M'
+            };
+            document.getElementById('comments-count').innerText = randomCounts.comments;
+            document.getElementById('retweets-count').innerText = randomCounts.retweets;
+            document.getElementById('likes-count').innerText = randomCounts.likes;
+            document.getElementById('views').innerText = randomCounts.views;
             const text = document.getElementById('tweet-input').value;
             if (!text.trim()) return;
 
